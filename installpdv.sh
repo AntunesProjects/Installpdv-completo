@@ -28,13 +28,14 @@ sudo apt-get install -f -y
 sudo apt install -y build-essential atril atril-common firefox
 
 # Instalação do AutoSystem
-wget -qO as_install.sh http://192.168.0.29/autosystem/as_install.sh
+curl -O http://192.168.0.29/autosystem/as_install.sh
 chmod +x as_install.sh
 sudo ./as_install.sh
 
 # Instalação do Mérito
-wget -qO jposto.zip http://192.168.0.29/jposto.zip
-sudo mv jposto.zip /opt/
+curl -O http://192.168.0.29/jposto_pdv.zip
+sudo cp jposto_pdv.zip /opt/
+sudo unzip /opt/jposto_pdv.zip
 
 # Configuração do CUPS
 sudo systemctl stop cups-browsed
@@ -50,9 +51,8 @@ sudo apt upgrade -y
 sudo apt install -y xorg slim icewm
 
 # Download e descompactação do toolbar_pdv.zip
-cd /usr/share/icewm
-sudo curl -O http://192.168.0.29/pdvconfig/toolbar_pdv.zip
-sudo unzip toolbar_pdv.zip
+cp toolbar_pdv.zip /usr/share/icewm
+sudo unzip /usr/share/icewm/toolbar_pdv.zip
 
 # Criação dos scripts de desligamento e reinicialização
 echo "#!/bin/bash" | sudo tee /usr/bin/desligamaquina.sh
