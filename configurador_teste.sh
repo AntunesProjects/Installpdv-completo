@@ -6,8 +6,8 @@ sudo apt update
 # Instala o Git
 sudo apt install -y git
 
-# Clona o repositório na branch teste
-git clone -b teste git@github.com:AntunesProjects/Installpdv-completo.git /tmp/pdv
+# Clona o repositório na branch teste usando HTTPS
+git clone -b teste https://github.com/AntunesProjects/Installpdv-completo.git /tmp/pdv
 
 # Acessa o diretório do repositório
 cd /tmp/pdv

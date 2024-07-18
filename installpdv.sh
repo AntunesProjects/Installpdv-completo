@@ -3,56 +3,93 @@
 # Atualização de pacotes
 sudo apt update
 sudo apt upgrade -y
+clear
+echo "update/upgrade: end"
+sleep 1
 
 # Instalação dos pacotes de funcionalidades
 sudo apt install -y vim cups net-tools lynx sshpass ntp ssh htop openjdk-11-jdk zip x11-xserver-utils gnome-terminal
+clear
+echo "pacotes de funcionalidades: end"
+sleep 1
 
 # Instalação do AnyDesk
 wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk.list
 sudo apt update
 sudo apt install -y anydesk
+clear
+echo "Anydesk: end"
+sleep 1
 
 # Instalação do Google Chrome
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 sudo apt update
 sudo apt install -y google-chrome-stable
+clear
+echo "Chrome: end"
+sleep 1
 
 # Instalação do TeamViewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo dpkg -i teamviewer_amd64.deb
 sudo apt-get install -f -y
+clear
+echo "Teamviewer: end"
+sleep 1
 
 # Instalação de outros softwares
 sudo apt install -y build-essential atril atril-common firefox
+clear
+echo "atril: end"
+sleep 1
 
 # Instalação do AutoSystem
-curl -O http://192.168.0.29/autosystem/as_install.sh
-chmod +x as_install.sh
-sudo ./as_install.sh
+#curl -O http://192.168.0.29/autosystem/as_install.sh
+#chmod +x as_install.sh
+#sudo ./as_install.sh
+clear
+echo "Autosystem: pausada"
+sleep 1
 
 # Instalação do Mérito
 curl -O http://192.168.0.29/jposto_pdv.zip
 sudo cp jposto_pdv.zip /opt/
 sudo unzip /opt/jposto_pdv.zip
+clear
+echo "Mérito: end"
+sleep 1
 
 # Configuração do CUPS
+sudo apt install cups
 sudo systemctl stop cups-browsed
 sudo systemctl disable cups-browsed
+clear
+echo "cups: end"
+sleep 1
 
 # Configuração de data e hora
 sudo timedatectl set-timezone America/Sao_Paulo
 timedatectl
+clear
+echo "Data e hora: end"
+sleep 1
 
 # Instalação e configuração do ambiente gráfico (icewm e slim)
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y xorg slim icewm
+clear
+echo "Ambiente gráfico: end"
+sleep 1
 
 # Download e descompactação do toolbar_pdv.zip
 cp toolbar_pdv.zip /usr/share/icewm
 sudo unzip /usr/share/icewm/toolbar_pdv.zip
+clear
+echo "Toolbar: end"
+sleep 1
 
 # Criação dos scripts de desligamento e reinicialização
 echo "#!/bin/bash" | sudo tee /usr/bin/desligamaquina.sh
@@ -62,6 +99,9 @@ sudo chmod +x /usr/bin/desligamaquina.sh
 echo "#!/bin/bash" | sudo tee /usr/bin/reiniciamaquina.sh
 echo "sudo shutdown -r now" | sudo tee -a /usr/bin/reiniciamaquina.sh
 sudo chmod +x /usr/bin/reiniciamaquina.sh
+clear
+echo "Script liga/desliga: end"
+sleep 1
 
 # Função para atualizar o CUPS
 update_cups() {
@@ -69,12 +109,18 @@ update_cups() {
     sed -i 's|ExecStart=/usr/sbin/cupsd|ExecStart=/usr/sbin/cupsd -f|' /lib/systemd/system/cups.service
     systemctl daemon-reload
     systemctl restart cups.service
+    clear
+    echo "Cups config: end"
+    sleep 1
 }
 
 # Função para ativar o Modo Texto
 activate_text_mode() {
     echo "Ativando o Modo Texto..."
-    sudo getty -8 38400 tty2
+    #sudo getty -8 38400 tty2
+    clear
+    echo "Modo de texto: pausada"
+    sleep 1
 }
 
 # Função para configurar aplicativo padrão PDF
@@ -83,6 +129,9 @@ configure_pdf_app() {
     sed -i 's|# deb http://archive.canonical.com/ubuntu xenial partner|deb http://archive.canonical.com/ubuntu xenial partner|' /etc/apt/sources.list
     apt-get update
     apt-get install -y xdg-utils
+    clear
+    echo "pdf config: end"
+    sleep 1
 }
 
 # Função para configurar permissões dos periféricos
@@ -94,6 +143,9 @@ KERNEL=="ttyUSB[0-9]", GROUP="dialout", MODE="0777"
 KERNEL=="lp[0-9]", GROUP="dialout", MODE="0777"
 KERNEL=="ttyACM[0-9]", GROUP="dialout", MODE="0777"
 EOL
+    clear
+    echo "perifericos config: end"
+    sleep 1
 }
 
 # Função para desabilitar proteção de tela
@@ -104,6 +156,9 @@ disable_screensaver() {
 /usr/bin/xset s off
 /usr/bin/xset -dpms
 EOL
+    clear
+    echo "tela config: end"
+    sleep 1
 }
 
 # Função para configurar GRUB
@@ -111,24 +166,36 @@ configure_grub() {
     echo "Configurando GRUB..."
     sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="net.ifnames=0 text"|' /etc/default/grub
     update-grub
+    clear
+    echo "grub config: end"
+    sleep 1
 }
 
 # Função para instalar complementos do Autosystem
 install_autosystem_complements() {
     echo "Instalando complementos do Autosystem..."
     apt-get install -y libxmlsec1 libxmlsec1-dev xmlsec1 libgdk-pixbuf2.0-dev
+    clear
+    echo "autosystem config: end"
+    sleep 1
 }
 
 # Função para instalar bibliotecas TEF
 install_tef_libraries() {
     echo "Instalando bibliotecas TEF..."
     cp /caminho/para/libs-tef/* /usr/lib/
+    clear
+    echo "Libs tef config: Não configurado"
+    sleep 1
 }
 
 # Função para instalar logs do sistema operacional
 install_syslogs() {
     echo "Instalando logs do sistema operacional..."
     apt-get install -y syslog-ng gnome-system-log
+    clear
+    echo "log config: end"
+    sleep 1
 }
 
 # Função para habilitar NumLock ao iniciar o SO
@@ -136,6 +203,9 @@ enable_numlock() {
     echo "Habilitando NumLock ao iniciar o SO..."
     apt-get install -y numlockx
     echo "greeter-setup-script=/usr/bin/numlockx on" >> /usr/share/lightdm/lightdm.conf.d/50-unity-greeter.conf
+    clear
+    echo "numlock config: end"
+    sleep 1
 }
 
 # Função para desabilitar modo pausa da impressora
@@ -150,24 +220,36 @@ EOL
     chmod +x /usr/local/bin/startprinter.sh
     echo "0-59/5 * * * * root /usr/local/bin/startprinter.sh" >> /etc/crontab
     /etc/init.d/cron restart
+    clear
+    echo "Impressora config: end"
+    sleep 1
 }
 
 # Função para instalar fontes para leitura de documentos
 install_fonts() {
     echo "Instalando fontes para leitura de documentos..."
     apt-get install -y msttcorefonts
+    clear
+    echo "fotes config: end"
+    sleep 1
 }
 
 # Função para configurar NTP
 configure_ntp() {
     echo "Configurando NTP..."
-    ntpq
+    #ntpq
+    clear
+    echo "nto config: desabilitado (ultrapassado)"
+    sleep 1
 }
 
 # Função para instalar dependências do Virt-Manager
 install_virtmanager_dependencies() {
     echo "Instalando dependências do Virt-Manager..."
     apt-get install -y build-essential checkinstall zlib1g-dev libssl-dev
+    clear
+    echo "virt manager config: end"
+    sleep 1
 }
 
 # Execução das funções
