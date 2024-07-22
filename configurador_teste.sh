@@ -24,13 +24,14 @@ sudo apt install -y git
 wait_for_locks
 
 # Clona o repositório na branch teste usando HTTPS
-git https://github.com/AntunesProjects/Installpdv-completo.git
+git clone https://github.com/AntunesProjects/Installpdv-completo.git
 
 # Acessa o diretório do repositório
-cd Installpdv-completo/
+cd Installpdv-completo.git
 
 # Dá permissão de execução para o script
 chmod +x installpdv.sh
 
 # Executa o script
 ./installpdv.sh
+
