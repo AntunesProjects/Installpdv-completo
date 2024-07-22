@@ -88,7 +88,7 @@ echo "Ambiente gráfico: end"
 sleep $WAIT_TIME
 
 # Descompactação do toolbar_pdv.zip
-cp toolbar_pdv.zip /usr/share/icewm
+cp Installpdv-completo/toolbar_pdv.zip /usr/share/icewm
 sudo unzip -o /usr/share/icewm/toolbar_pdv.zip
 clear
 echo "Toolbar: end"
