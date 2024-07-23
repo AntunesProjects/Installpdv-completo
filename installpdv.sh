@@ -88,11 +88,12 @@ echo "Ambiente gráfico: end"
 sleep $WAIT_TIME
 
 # Descompactação do toolbar_pdv.zip
-#sudo rm -rf /usr/share/icewm/*
-#sudo cp Installpdv-completo/toolbar_pdv.zip /usr/share/icewm
-#sudo unzip -o /usr/share/icewm/toolbar_pdv.zip
+cd Installpdv-completo
+sudo cp toolbar_pdv.zip /usr/share/icewm
+cd /usr/share/icewm/
+sudo unzip -o toolbar_pdv.zip
 clear
-echo "Toolbar: Pausada"
+echo "Toolbar: Teste"
 sleep $WAIT_TIME
 
 # Criação dos scripts de desligamento e reinicialização
