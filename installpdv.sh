@@ -241,12 +241,12 @@ install_other_software
 echo "atril: end"
 sleep $WAIT_TIME
 
-install_autosystem
-echo "Autosystem: Teste"
+#install_autosystem
+echo "Autosystem: Off"
 sleep $WAIT_HMG
 
-install_merito
-echo "Mérito: Teste"
+#install_merito
+echo "Mérito: Off"
 sleep $WAIT_HMG
 
 configure_cups
