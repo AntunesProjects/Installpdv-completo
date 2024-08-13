@@ -13,7 +13,7 @@ update_system() {
 
 # Função para instalar pacotes de funcionalidades
 install_functional_packages() {
-    sudo apt install -y vim cups net-tools lynx sshpass ntp ssh htop openjdk-11-jdk zip x11-xserver-utils gnome-terminal mlocate
+    sudo apt install -y vim cups net-tools lynx sshpass ntp ssh htop openjdk-11-jdk zip x11-xserver-utils gnome-terminal mlocate system-config-printer
     clear
 }
 
