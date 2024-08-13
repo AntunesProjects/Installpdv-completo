@@ -206,7 +206,7 @@ install_fonts() {
 
 # Função para configurar NTP
 configure_ntp() {
-    #ntpq
+    ntpq
     clear
 }
 
@@ -214,6 +214,20 @@ configure_ntp() {
 install_virtmanager_dependencies() {
     apt-get install -y build-essential checkinstall zlib1g-dev libssl-dev
     clear
+}
+
+install_jlibs() {
+    #download jlibs
+    curl -O http://192.168.0.29/pdvconfig/jlibs/libjCliSiTefI.so
+    
+    #copiando para os diretorios
+    sudo cp libjCliSiTefI.so /usr/java/package/lib/
+    sudo cp libjCliSiTefI.so /usr/lib/x86_64-linux-gnu/jni/
+    sudo cp libjCliSiTefI.so /lib/x86_64-linux-gnu/
+    sudo cp libjCliSiTefI.so /usr/lib/jni/
+    sudo cp libjCliSiTefI.so /lib/
+    sudo cp libjCliSiTefI.so /usr/lib/
+    
 }
 
 # Execução das funções com echo e sleep após cada função
@@ -323,6 +337,10 @@ sleep $WAIT_TIME
 
 install_virtmanager_dependencies
 echo "virt manager config: end"
+sleep $WAIT_TIME
+
+install_jlibs
+echo "libjCliSiTefI.so: end"
 sleep $WAIT_TIME
 
 echo "Instalação e configuração concluídas com sucesso!"
