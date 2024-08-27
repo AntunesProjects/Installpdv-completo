@@ -271,16 +271,16 @@ configure_time
 echo "Data e hora: end"
 sleep $WAIT_TIME
 
-install_graphical_environment
-echo "Ambiente gráfico: end"
+#install_graphical_environment
+echo "Ambiente gráfico: pausada"
 sleep $WAIT_TIME
 
-extract_toolbar
-echo "Toolbar: Teste"
+#extract_toolbar
+echo "Toolbar: Pausada"
 sleep $WAIT_TIME
 
-create_shutdown_restart_scripts
-echo "Script liga/desliga: end"
+#create_shutdown_restart_scripts
+echo "Script liga/desliga: pausada"
 sleep $WAIT_TIME
 
 update_cups
