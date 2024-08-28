@@ -272,22 +272,22 @@ echo "Data e hora: end"
 sleep $WAIT_TIME
 
 install_graphical_environment
-echo "Ambiente gráfico: pausada"
+echo "Ambiente gráfico: Teste"
 sleep $WAIT_TIME
 
 extract_toolbar
-echo "Toolbar: Pausada"
+echo "Toolbar: Teste"
 sleep $WAIT_TIME
 
 create_shutdown_restart_scripts
-echo "Script liga/desliga: pausada"
+echo "Script liga/desliga: Teste"
 sleep $WAIT_TIME
 
 update_cups
 echo "Cups config: end"
 sleep $WAIT_TIME
 
-activate_text_mode
+#activate_text_mode
 echo "Modo de texto: pausada"
 sleep $WAIT_TIME
 
