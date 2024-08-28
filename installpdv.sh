@@ -311,7 +311,7 @@ install_autosystem_complements
 echo "autosystem config: end"
 sleep $WAIT_TIME
 
-install_tef_libraries
+#install_tef_libraries
 echo "Libs tef config: Não configurado"
 sleep $WAIT_TIME
 
@@ -331,7 +331,7 @@ install_fonts
 echo "fotes config: end"
 sleep $WAIT_TIME
 
-configure_ntp
+#configure_ntp
 echo "ntp config: desabilitado (ultrapassado)"
 sleep $WAIT_TIME
 
