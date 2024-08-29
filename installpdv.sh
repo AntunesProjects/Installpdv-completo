@@ -94,8 +94,8 @@ install_graphical_environment() {
     echo "slim" | sudo tee /etc/X11/default-display-manager
 
     # Remover pacotes desnecessários do GNOME (opcional)
-    sudo apt remove --purge -y ubuntu-desktop gnome-shell
-    sudo apt autoremove -y
+    #sudo apt remove --purge -y ubuntu-desktop gnome-shell
+    #sudo apt autoremove -y
 }
 
 # Função para descompactar toolbar_pdv.zip
