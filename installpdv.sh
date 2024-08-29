@@ -88,14 +88,14 @@ install_graphical_environment() {
     clear
 
     # Configurar o SLiM para iniciar o IceWM
-    sudo sed -i 's|^login_cmd .*|login_cmd exec /bin/bash -login /etc/X11/Xsession icewm|' /etc/slim.conf
+    #sudo sed -i 's|^login_cmd .*|login_cmd exec /bin/bash -login /etc/X11/Xsession icewm|' /etc/slim.conf
 
     # Definir o SLiM como o gerenciador de exibição padrão
-    echo "slim" | sudo tee /etc/X11/default-display-manager
+    #echo "slim" | sudo tee /etc/X11/default-display-manager
 
     # Remover pacotes desnecessários do GNOME (opcional)
-    #sudo apt remove --purge -y ubuntu-desktop gnome-shell
-    #sudo apt autoremove -y
+    sudo apt remove --purge -y ubuntu-desktop gnome-shell
+    sudo apt autoremove -y
 }
 
 # Função para descompactar toolbar_pdv.zip
