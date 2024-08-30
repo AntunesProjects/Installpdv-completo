@@ -109,15 +109,30 @@ extract_toolbar() {
 
 # Função para criar scripts de desligamento e reinicialização
 create_shutdown_restart_scripts() {
-    echo "#!/bin/bash" | sudo tee /usr/bin/desligamaquina.sh
-    echo "sudo shutdown -h now" | sudo tee -a /usr/bin/desligamaquina.sh
+    # Criar o script para desligar a máquina
+    sudo tee /usr/bin/desligamaquina.sh > /dev/null << 'EOF'
+#!/bin/bash
+# Desliga a máquina imediatamente
+sudo shutdown -h now
+EOF
+
+    # Tornar o script executável
     sudo chmod +x /usr/bin/desligamaquina.sh
 
-    echo "#!/bin/bash" | sudo tee /usr/bin/reiniciamaquina.sh
-    echo "sudo shutdown -r now" | sudo tee -a /usr/bin/reiniciamaquina.sh
+    # Criar o script para reiniciar a máquina
+    sudo tee /usr/bin/reiniciamaquina.sh > /dev/null << 'EOF'
+#!/bin/bash
+# Reinicia a máquina imediatamente
+sudo shutdown -r now
+EOF
+
+    # Tornar o script executável
     sudo chmod +x /usr/bin/reiniciamaquina.sh
+
+    # Limpar a tela após a criação dos scripts
     clear
 }
+
 
 # Função para atualizar o CUPS
 update_cups() {
