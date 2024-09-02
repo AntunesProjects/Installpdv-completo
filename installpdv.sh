@@ -241,6 +241,167 @@ install_virtmanager_dependencies() {
     clear
 }
 
+## CONFIGURAÇÕES ##
+
+##Netplan
+    function confNetplan(){
+        echo "# This is the network config written by "subiquity"
+network:
+ ethernets:
+  eth0:
+   addresses:
+   - $ip/24
+   gateway4: $mgateway
+   nameservers:
+     addresses:
+     - $mdns
+     search:
+      - buffon.com.br
+ version: 2" > /etc/netplan/00-installer-config.yaml
+    }
+
+##sshd
+    function confSSHD(){
+        echo "
+        # This is the sshd server system-wide configuration file.  See
+        # sshd_config(5) for more information.
+
+        # This sshd was compiled with PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+        # The strategy used for options in the default sshd_config shipped with
+        # OpenSSH is to specify options with their default value where
+        # possible, but leave them commented.  Uncommented options override the
+        # default value.
+
+        Include /etc/ssh/sshd_config.d/*.conf
+
+        Port 221$pdv
+        #AddressFamily any
+        #ListenAddress 0.0.0.0
+        #ListenAddress ::
+
+        #HostKey /etc/ssh/ssh_host_rsa_key
+        #HostKey /etc/ssh/ssh_host_ecdsa_key
+        #HostKey /etc/ssh/ssh_host_ed25519_key
+
+        # Ciphers and keying
+        #RekeyLimit default none
+
+        # Logging
+        #SyslogFacility AUTH
+        #LogLevel INFO
+
+        # Authentication:
+
+        #LoginGraceTime 2m
+        PermitRootLogin yes
+        #StrictModes yes
+        #MaxAuthTries 6
+        #MaxSessions 10
+
+        #PubkeyAuthentication yes
+
+        # Expect .ssh/authorized_keys2 to be disregarded by default in future.
+        #AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
+
+        #AuthorizedPrincipalsFile none
+
+        #AuthorizedKeysCommand none
+        #AuthorizedKeysCommandUser nobody
+
+        # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+        #HostbasedAuthentication no
+        # Change to yes if you don't trust ~/.ssh/known_hosts for
+        # HostbasedAuthentication
+        #IgnoreUserKnownHosts no
+        # Don't read the user's ~/.rhosts and ~/.shosts files
+        #IgnoreRhosts yes
+
+        # To disable tunneled clear text passwords, change to no here!
+        #PasswordAuthentication yes
+        #PermitEmptyPasswords no
+
+        # Change to yes to enable challenge-response passwords (beware issues with
+        # some PAM modules and threads)
+        KbdInteractiveAuthentication no
+
+        # Kerberos options
+        #KerberosAuthentication no
+        #KerberosOrLocalPasswd yes
+        #KerberosTicketCleanup yes
+        #KerberosGetAFSToken no
+
+        # GSSAPI options
+        #GSSAPIAuthentication no
+        #GSSAPICleanupCredentials yes
+        #GSSAPIStrictAcceptorCheck yes
+        #GSSAPIKeyExchange no
+
+        # Set this to 'yes' to enable PAM authentication, account processing,
+        # and session processing. If this is enabled, PAM authentication will
+        # be allowed through the KbdInteractiveAuthentication and
+        # PasswordAuthentication.  Depending on your PAM configuration,
+        # PAM authentication via KbdInteractiveAuthentication may bypass
+        # the setting of "PermitRootLogin without-password".
+        # If you just want the PAM account and session checks to run without
+        # PAM authentication, then enable this but set PasswordAuthentication
+        # and KbdInteractiveAuthentication to 'no'.
+        UsePAM yes
+
+        #AllowAgentForwarding yes
+        #AllowTcpForwarding yes
+        #GatewayPorts no
+        X11Forwarding yes
+        #X11DisplayOffset 10
+        #X11UseLocalhost yes
+        #PermitTTY yes
+        PrintMotd no
+        #PrintLastLog yes
+        #TCPKeepAlive yes
+        #PermitUserEnvironment no
+        #Compression delayed
+        #ClientAliveInterval 0
+        #ClientAliveCountMax 3
+        #UseDNS no
+        #PidFile /run/sshd.pid
+        #MaxStartups 10:30:100
+        #PermitTunnel no
+        #ChrootDirectory none
+        #VersionAddendum none
+
+        # no default banner path
+        #Banner none
+
+        # Allow client to pass locale environment variables
+        AcceptEnv LANG LC_*
+
+        # override default of no subsystems
+        Subsystem sftp  /usr/lib/openssh/sftp-server
+
+        # Example of overriding settings on a per-user basis
+        #Match User anoncvs
+        #       X11Forwarding no
+        #       AllowTcpForwarding no
+        #       PermitTTY no
+        #       ForceCommand cvs server
+        PasswordAuthentication yes
+        " > /etc/ssh/sshd_config
+            }
+
+##merito
+    function attMerito(){
+        cd /opt
+        curl -O http://192.168.0.29/jposto.zip
+        unzip jposto.zip
+        echo "#Fri Feb 24 08:08:34 BRT 2023
+BD=jposto
+IP=10.12.$posto.254
+SENHA=0x6fy0x78y0x6by0x62y0x68y0x6ey
+EMPRESA=001
+UNIDADE=$posto
+USUARIO=0x70y0x6fy0x73y0x74y0x67y0x72y0x65y0x73y" > /opt/jposto/bin/com/resources/conf.properties
+    }
+
 # Execução das funções com echo e sleep após cada função
 update_system
 echo "update/upgrade: end"
@@ -351,3 +512,132 @@ echo "virt manager config: end"
 sleep $WAIT_TIME
 
 echo "Instalação e configuração concluídas com sucesso!"
+
+#inicio do script
+while true; do
+    echo "Digite o posto"
+
+    read posto
+    echo " "
+
+    echo "Digite o pdv"
+
+    read pdv
+    echo " "
+    sleep 1
+
+    clear
+    echo "Confirme as informações:"
+    echo "Posto: $posto"
+    echo "PDV: $pdv"
+    echo " "
+    echo " "
+    
+    sleep 1
+    echo "1. Confirmar"
+    echo "2. Corrigir"
+
+    read opcao
+    clear
+
+    case $opcao in
+        1)       
+        #Teamviewer
+        echo "instalando teamviewer"
+        sleep 2
+            cd /usr/src
+            $awget $teamviewer
+            instTeamviewer
+                clear
+            sleep 2
+        echo "Teamviewer instalado"
+        sleep 2
+                clear
+
+        #Anydesk
+        echo "instalando Anydesk"
+        sleep 2
+            instAnydesk
+                clear
+        echo "Anydesk instalado"
+        sleep 2
+                clear
+
+        #Config rede final
+        ip="10.12.$posto.1$pdv"
+        mgateway="10.12.$posto.254"
+        mdns="10.12.$posto.254"       
+
+        #Ajuste de netplan 
+        echo "configurando netplan"
+        sleep 1
+        confNetplanDHCP
+        clear
+        echo "netplan configurado"
+        clear
+
+        #Ajuste de ssh 
+        echo "configurando ssh"
+        sleep 2
+            confSSHD
+                clear
+        echo "ssh configurado"
+        echo " "
+        sleep 2
+                clear
+
+        #Ajuste anydesk final
+        #VPN
+
+
+            #Atualizando sistemas
+            while true; do
+            
+            echo "Atualizando o sistema do PDV"
+            echo " "
+            sleep 1
+            echo "1. Autosystem"
+            echo "2. Merito"
+
+            read system
+
+                case $system in
+                    1)  
+                        #Instruções para config final
+                        echo " "
+                        echo " "
+                        echo "INSTRUÇÕES PARA CONFIGURAÇÕES FINAIS"
+                        echo " "
+                        sleep 1
+                        echo "COMO USER, EXECUTE:"
+                        echo " " 
+                        sleep 1
+                        echo "as_config:"
+                        echo "PBUFQxxx (final do cnpj)"
+                        echo "SE000xxx (posto + n do pdv)"
+                        echo " "
+                        sleep 1
+                        echo "Configurar teamviewer"
+                        echo "Reinicar a maquina"
+                        break 2
+                        ;;
+
+                        2)  
+                        echo "Baixando jposto"
+                        sleep 1
+                        attMerito
+                        clear
+                        echo "Instalação finalizada"
+                        break 2
+                        ;;
+                esac
+            done
+            ;;            
+
+
+        2)
+            echo "Corrigindo informações"
+            echo " "
+            ;;
+    esac
+done
